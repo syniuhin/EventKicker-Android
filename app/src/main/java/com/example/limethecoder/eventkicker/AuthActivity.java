@@ -26,6 +26,7 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
     EditText password;
     EditText repassword;
     Button signup;
+    User user;
     public static final int RESULT_FAILED = 77;
 
     @Override
@@ -97,8 +98,8 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
         // TODO: Implement authentication logic here.
 
         MyApiEndpointInterface apiService = ServiceManager.newService();
-        User user = new User(nameData, emailData, passwordData);
-        Call<ApiResponse<User>> call = apiService.createUser(user);
+        User new_user = new User(nameData, emailData, passwordData);
+        Call<ApiResponse<User>> call = apiService.createUser(new_user);
         call.enqueue(new Callback<ApiResponse<User>>() {
             @Override
             public void onResponse(retrofit.Response<ApiResponse<User>> response, Retrofit retrofit) {
@@ -117,6 +118,35 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
                 setResult(RESULT_CANCELED);
             }
         });
+
+      ServiceManager.MyApiEndpointInterface apiServiceAuth = ServiceManager
+          .newService(emailData, passwordData);
+      Call<User> callAuth = apiService.login();
+
+      callAuth.enqueue(new Callback<User>() {
+        @Override
+        public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
+
+          if(response.code() == 200) {
+            if (response.body() != null) {
+              user = response.body();
+              Toast.makeText(getBaseContext(), "Welcome " + user.name, Toast.LENGTH_LONG).show();
+              setResult(RESULT_OK);
+            } else {
+              setResult(RESULT_CANCELED);
+            }
+          }
+          else {
+            setResult(RESULT_CANCELED);
+          }
+          progressDialog.dismiss();
+        }
+
+        @Override
+        public void onFailure(Throwable t) {
+          setResult(RESULT_CANCELED);
+        }
+      });
 
         new android.os.Handler().postDelayed(
                 new Runnable() {

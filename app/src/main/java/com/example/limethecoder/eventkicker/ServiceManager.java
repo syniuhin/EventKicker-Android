@@ -1,22 +1,21 @@
 package com.example.limethecoder.eventkicker;
 
 import android.util.Base64;
-
 import com.example.limethecoder.eventkicker.net.ApiResponse;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-
-import java.io.IOException;
-
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import retrofit.Call;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
-import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
+
+import java.io.IOException;
 
 /**
  * Created by Тарас - матрас on 12/20/2015.
@@ -44,7 +43,7 @@ public class ServiceManager {
 
                     Request.Builder requestBuilder = original.newBuilder()
                             .header("Authorization", basic)
-                    .header("Accept", "applicaton/json")
+                    .header("Content-Type", "applicaton/json")
                     .method(original.method(), original.body());
 
                     Request request = requestBuilder.build();
@@ -52,6 +51,9 @@ public class ServiceManager {
                 }
             });
         }
+      HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+      interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+      httpClient.interceptors().add(interceptor);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -72,7 +74,7 @@ public class ServiceManager {
         Call<ApiResponse<EventItem>> createEvent(@Body EventItem event);
 
         @POST("/api/login")
-        Call<ApiResponse<User>> login();
+        Call<User> login();
 
         @GET("/api/events/named")
         Call<ApiResponse<EventItem>> loadEvents();

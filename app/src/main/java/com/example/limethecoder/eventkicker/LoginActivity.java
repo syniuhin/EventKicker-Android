@@ -2,21 +2,13 @@ package com.example.limethecoder.eventkicker;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-
-import android.content.Intent;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Button;
 import android.widget.EditText;
-import android.os.Handler;
-
-import com.example.limethecoder.eventkicker.net.ApiResponse;
-
+import android.widget.Toast;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Retrofit;
@@ -83,16 +75,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // TODO: Implement authentication logic here.
 
-        ServiceManager.MyApiEndpointInterface apiService = ServiceManager.newService(emailData, passwordData);
-        Call<ApiResponse<User>> call = apiService.login();
+      ServiceManager.MyApiEndpointInterface apiService = ServiceManager.newService(emailData, passwordData);
+      Call<User> call = apiService.login();
 
-        call.enqueue(new Callback<ApiResponse<User>>() {
+      call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(retrofit.Response<ApiResponse<User>> response, Retrofit retrofit) {
+            public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
 
                 if(response.code() == 200) {
-                    if (response.body() != null && response.body().success) {
-                        user = response.body().single;
+                    if (response.body() != null) {
+                        user = response.body();
                         Toast.makeText(getBaseContext(), "Welcome " + user.name, Toast.LENGTH_LONG).show();
                         setResult(RESULT_OK);
                     } else {
@@ -102,9 +94,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else {
                     Toast.makeText(getBaseContext(), "Authentication failed", Toast.LENGTH_LONG).show();
-                    progressDialog.dismiss();
                     setResult(RESULT_CANCELED);
                 }
+              progressDialog.dismiss();
             }
 
             @Override

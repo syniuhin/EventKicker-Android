@@ -10,17 +10,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.limethecoder.eventkicker.net.ApiResponse;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
-
-import java.util.Calendar;
-
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Retrofit;
+
+import java.util.Calendar;
 
 public class EventCreator extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener,
         DatePickerDialog.OnDateSetListener, View.OnClickListener {
@@ -47,7 +45,7 @@ public class EventCreator extends AppCompatActivity implements TimePickerDialog.
 
         description = (EditText)findViewById(R.id.description);
         eventName = (EditText)findViewById(R.id.nameEvent);
-        submitBtn = (Button)findViewById(R.id.submit);
+        submitBtn = (Button)findViewById(R.id.event_creator_submit_button);
 
         submitBtn.setOnClickListener(this);
 
@@ -147,12 +145,11 @@ public class EventCreator extends AppCompatActivity implements TimePickerDialog.
         String secondString = second < 10 ? "0"+second : ""+second;
 
         String currTime = hourString + minuteString + secondString;
-        String currDate = "" +day +(++month) +year;
+        String currDate = "" +year +(++month) +day;
 
         String finalCurrDate = currDate + "T" + currTime + pol;
 
         EventItem event = new EventItem();
-        event.setTimeScheduled(requestDateStr);
         event.setAuthorId(5);
         event.setTimeScheduled(finalCurrDate);
         event.setName(name);

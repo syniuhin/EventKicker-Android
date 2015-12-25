@@ -10,15 +10,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.*;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -26,7 +20,6 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.viewpagerindicator.CirclePageIndicator;
-import com.example.limethecoder.eventkicker.AuthActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
 
-        //startActivity(new Intent(this, EventList.class));
+        startActivity(new Intent(this, EventCreator.class));
 
       // startActivity(new Intent(this, UserPage.class).putExtra("id", 9));
 
