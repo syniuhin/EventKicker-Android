@@ -22,12 +22,6 @@
                       android:layout_height="wrap_content"
                       android:orientation="vertical">
 
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Description"
-                    style="@style/CardViewHeader"/>
-
             <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -38,7 +32,14 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="Description"
+                        style="@style/CardViewHeader"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:id="@+id/event_descr"
+                        android:layout_marginTop="15dp"
                         android:text="Description Description Description Description Description Description Description Description"
                         android:padding="10dp"/>
 
@@ -49,26 +50,29 @@
                     android:layout_height="wrap_content"
                     android:text="Additional information"
                     style="@style/CardViewHeader"
+                    android:layout_marginTop="15dp"
                     android:textSize="22sp"
                     android:gravity="left"/>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Author name"
-                    android:id="@+id/author_name"
-                    style="@style/CardViewHeader"/>
 
             <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp">
 
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Author name"
+                        android:id="@+id/author_name"
+                        style="@style/CardViewHeader"/>
+
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:padding="16dp">
 
                     <FrameLayout
@@ -100,12 +104,6 @@
 
             </android.support.v7.widget.CardView>
 
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Created date"
-                    style="@style/CardViewHeader"/>
-
             <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -113,9 +111,16 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp">
 
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Created date"
+                        style="@style/CardViewHeader"/>
+
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:padding="16dp">
 
                     <FrameLayout
@@ -147,12 +152,6 @@
 
             </android.support.v7.widget.CardView>
 
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Scheduled date"
-                    style="@style/CardViewHeader"/>
-
             <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -160,9 +159,16 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp">
 
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Scheduled date"
+                        style="@style/CardViewHeader"/>
+
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:padding="16dp">
 
                     <FrameLayout
@@ -194,17 +200,6 @@
 
             </android.support.v7.widget.CardView>
 
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Comments"
-                    android:textSize="15sp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
-                    android:textColor="#ff272727"/>
-
             <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -223,10 +218,12 @@
                               android:text="Comments"
                               style="@style/CardViewHeader"/>
 
-                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                  android:layout_width="match_parent"
-                                  android:layout_height="wrap_content"
-                                  android:orientation="vertical">
+                    <LinearLayout
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
 
 
                         <TextView android:layout_width="wrap_content"
@@ -237,7 +234,7 @@
                                   android:textSize="20sp"
                                   android:gravity="center_vertical"
                                   android:textStyle="bold"
-                                  android:text = "Author">
+                                  android:text="Author">
                         </TextView>
 
                         <TextView android:layout_width="wrap_content"
@@ -247,7 +244,7 @@
                                   android:layout_marginTop="7dp"
                                   android:layout_marginLeft="10dp"
                                   android:textSize="17sp"
-                                  android:text = "Comment">
+                                  android:text="Comment">
                         </TextView>
 
 
@@ -255,16 +252,17 @@
                                   android:layout_height="wrap_content"
                                   android:id="@+id/comment_date"
                                   android:layout_marginTop="5dp"
-                                  android:text = "Date">
+                                  android:text="Date">
                         </TextView>
 
                     </LinearLayout>
 
-                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                  android:layout_width="match_parent"
-                                  android:layout_height="wrap_content"
-                                  android:orientation="vertical"
-                        android:layout_marginTop="10dp">
+                    <LinearLayout
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="10dp">
 
 
                         <TextView android:layout_width="wrap_content"
@@ -275,17 +273,17 @@
                                   android:textSize="20sp"
                                   android:gravity="center_vertical"
                                   android:textStyle="bold"
-                                  android:text = "Author">
+                                  android:text="Author">
                         </TextView>
 
                         <TextView android:layout_width="wrap_content"
                                   android:layout_height="wrap_content"
                                   android:id="@+id/comment_content2"
                                   android:maxLines="4"
-                                  android:layout_marginTop="7dp"
+                                  android:layout_marginTop="10dp"
                                   android:layout_marginLeft="10dp"
                                   android:textSize="17sp"
-                                  android:text = "Comment">
+                                  android:text="Comment">
                         </TextView>
 
 
@@ -293,16 +291,17 @@
                                   android:layout_height="wrap_content"
                                   android:id="@+id/comment_date2"
                                   android:layout_marginTop="5dp"
-                                  android:text = "Date">
+                                  android:text="Date">
                         </TextView>
 
                     </LinearLayout>
 
-                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                  android:layout_width="match_parent"
-                                  android:layout_height="wrap_content"
-                                  android:orientation="vertical"
-                                  android:layout_marginTop="10dp">
+                    <LinearLayout
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="10dp">
 
 
                         <TextView android:layout_width="wrap_content"
@@ -313,7 +312,7 @@
                                   android:textSize="20sp"
                                   android:gravity="center_vertical"
                                   android:textStyle="bold"
-                                  android:text = "Author">
+                                  android:text="Author">
                         </TextView>
 
                         <TextView android:layout_width="wrap_content"
@@ -323,7 +322,7 @@
                                   android:layout_marginTop="7dp"
                                   android:layout_marginLeft="10dp"
                                   android:textSize="17sp"
-                                  android:text = "Comment">
+                                  android:text="Comment">
                         </TextView>
 
 
@@ -331,7 +330,7 @@
                                   android:layout_height="wrap_content"
                                   android:id="@+id/comment_date3"
                                   android:layout_marginTop="5dp"
-                                  android:text = "Date">
+                                  android:text="Date">
                         </TextView>
 
                     </LinearLayout>
@@ -346,6 +345,13 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
+                <Button android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/likes_button"
+                        android:layout_marginTop="10dp"
+                        android:text="Like"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

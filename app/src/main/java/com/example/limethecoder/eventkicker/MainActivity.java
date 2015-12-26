@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
 
-        startActivity(new Intent(this, EventList.class));
+        //startActivity(new Intent(this, EventList.class));
 
       // startActivity(new Intent(this, UserPage.class).putExtra("id", 9));
 

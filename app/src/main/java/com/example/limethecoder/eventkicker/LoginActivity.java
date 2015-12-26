@@ -3,6 +3,7 @@ package com.example.limethecoder.eventkicker;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.show();
 
         String emailData = email.getText().toString();
-        String passwordData = password.getText().toString();
+        final String passwordData = password.getText().toString();
 
         // TODO: Implement authentication logic here.
 
@@ -85,6 +86,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(response.code() == 200) {
                     if (response.body() != null) {
                         user = response.body();
+                      PreferenceManager.getDefaultSharedPreferences
+                          (LoginActivity.this).edit().putInt("userId", user
+                          .id).putString("username", user.username).putString
+                          ("userPassword", passwordData).commit();
                         Toast.makeText(getBaseContext(), "Welcome " + user.name, Toast.LENGTH_LONG).show();
                         setResult(RESULT_OK);
                     } else {

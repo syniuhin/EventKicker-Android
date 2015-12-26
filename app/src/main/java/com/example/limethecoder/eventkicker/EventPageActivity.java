@@ -1,20 +1,25 @@
 package com.example.limethecoder.eventkicker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import com.example.limethecoder.eventkicker.model.Comment;
+import com.example.limethecoder.eventkicker.model.Like;
 import com.example.limethecoder.eventkicker.net.ApiResponse;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.google.gson.Gson;
 import retrofit.Call;
 import retrofit.Callback;
+import retrofit.Response;
 import retrofit.Retrofit;
 
 import java.util.ArrayList;
@@ -22,6 +27,7 @@ import java.util.ArrayList;
 public class EventPageActivity extends AppCompatActivity {
 
   MaterialViewPager mViewPager;
+  int mLikesCnt;
   private int mEventId;
   private TextView mDescriptionTextView;
   private TextView mAuthorNameTextView;
@@ -30,22 +36,18 @@ public class EventPageActivity extends AppCompatActivity {
   private TextView mCommentAuthor1;
   private TextView mCommentAuthor2;
   private TextView mCommentAuthor3;
-
   private TextView mCommentContent1;
   private TextView mCommentContent2;
   private TextView mCommentContent3;
-
   private TextView mCommentDate1;
   private TextView mCommentDate2;
   private TextView mCommentDate3;
-
   private TextView mCommentsMore;
-
+  private Button mLikeButton;
+  private Integer mLikesCount = -1;
+  private Boolean mIsLiked = false;
   private EventItem mEventItem;
   private ArrayList<Comment> mComments;
-
-  int mLikesCnt;
-
   private ServiceManager.MyApiEndpointInterface mService;
 
   @Override
@@ -64,10 +66,17 @@ public class EventPageActivity extends AppCompatActivity {
     TextView header_logo = (TextView) mViewPager.findViewById(R.id.logo_white);
     header_logo.setText(mEventItem.getName());
 
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences
+        (this);
+    String username = prefs.getString("username", "");
+    String passwd = prefs.getString("userPassword", "");
+
+    mService = ServiceManager.newService(username, passwd);
+
     findViews();
     loadDataToView();
     setListeners();
-    mService = ServiceManager.newService();
+
 
     //getLikesCount();
     getComments();
@@ -89,7 +98,8 @@ public class EventPageActivity extends AppCompatActivity {
 
   private void findViews() {
     mDescriptionTextView = (TextView) findViewById(R.id.event_descr);
-    mAuthorNameTextView = (TextView) findViewById(R.id.name);
+    mAuthorNameTextView = (TextView) findViewById(R.id.name); // Don't forget
+    // about Stead (John Stead)
     mTimeCreatedTextView = (TextView) findViewById(R.id.created_date);
     mTimeScheduledTextView = (TextView) findViewById(R.id.scheduled_date);
 
@@ -106,6 +116,9 @@ public class EventPageActivity extends AppCompatActivity {
     mCommentDate3 = (TextView) findViewById(R.id.comment_date3);
 
     mCommentsMore = (TextView) findViewById(R.id.comments_more);
+
+    mLikeButton = (Button) findViewById(R.id.likes_button);
+    mLikeButton.setEnabled(false);
   }
 
   private void loadDataToView() {
@@ -113,6 +126,8 @@ public class EventPageActivity extends AppCompatActivity {
     mAuthorNameTextView.setText(mEventItem.getAuthorName());
     mTimeCreatedTextView.setText(mEventItem.getParsedCreateDate());
     mTimeScheduledTextView.setText(mEventItem.getSchParsedDate());
+    getLikesCount();
+    isLiked();
   }
 
   private void setListeners() {
@@ -143,15 +158,27 @@ public class EventPageActivity extends AppCompatActivity {
     mCommentsMore.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent i = new Intent(EventPageActivity.this, CommentsListActivity.class);
+        Intent i = new Intent(EventPageActivity.this,
+                              CommentsListActivity.class);
         i.putExtra("id", mEventItem.getId());
         startActivity(i);
+      }
+    });
+
+    mLikeButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Like like = new Like();
+        like.eventId = (long) mEventId;
+        like.authorId = (long) PreferenceManager.getDefaultSharedPreferences
+            (EventPageActivity.this).getInt("userId", -1);
+        postLike(like);
       }
     });
   }
 
   private void loadCommentsToView() {
-    if(mComments == null || mComments.size() < 3)
+    if (mComments == null || mComments.size() < 3)
       return;
 
     mCommentAuthor1.setText(mComments.get(0).authorName);
@@ -188,15 +215,34 @@ public class EventPageActivity extends AppCompatActivity {
     });
   }
 
-  private void getLikesCount() {
-    Call<ApiResponse> call = mService.getLikesCnt(mEventId);
-    call.enqueue(new Callback<ApiResponse>() {
+  private void postLike(final Like like) {
+    Call<ApiResponse<Like>> call = mService.postLike(like);
+    call.enqueue(new Callback<ApiResponse<Like>>() {
       @Override
-      public void onResponse(retrofit.Response<ApiResponse> response,
+      public void onResponse(Response<ApiResponse<Like>> response,
                              Retrofit retrofit) {
-
         if (response.body().success) {
-          //mLikesCnt = (int)response.body().single; ??
+          isLiked();
+          getLikesCount();
+        }
+      }
+
+      @Override
+      public void onFailure(Throwable t) {
+
+      }
+    });
+  }
+
+  private void getLikesCount() {
+    Call<ApiResponse<Integer>> call = mService.getLikesCount(mEventId);
+    call.enqueue(new Callback<ApiResponse<Integer>>() {
+      @Override
+      public void onResponse(Response<ApiResponse<Integer>> response,
+                             Retrofit retrofit) {
+        if (response.body().success) {
+          mLikesCount = response.body().single;
+          updateLikeButton();
         }
       }
 
@@ -208,4 +254,30 @@ public class EventPageActivity extends AppCompatActivity {
     });
   }
 
+  private void isLiked() {
+    Call<ApiResponse<Boolean>> call = mService.isLiked(mEventId);
+    call.enqueue(new Callback<ApiResponse<Boolean>>() {
+
+      @Override
+      public void onResponse(Response<ApiResponse<Boolean>> response,
+                             Retrofit retrofit) {
+        if (response.body().success) {
+          mIsLiked = response.body().single;
+          updateLikeButton();
+        }
+      }
+
+      @Override
+      public void onFailure(Throwable t) {
+
+      }
+    });
+  }
+
+  private void updateLikeButton() {
+    mLikeButton.setText(
+        ((mIsLiked) ? "Liked " : "Like ") +
+            ((mLikesCount > 0) ? mLikesCount.toString() : ""));
+    mLikeButton.setEnabled(!mIsLiked);
+  }
 }
