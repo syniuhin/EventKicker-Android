@@ -22,4 +22,7 @@
     <string name="second_activity_text">Second activity</string>
     <string name="title_activity_user_page">user_page</string>
     <string name="title_activity_event_creator">EventCreator</string>
+    <string name="title_activity_comments_list">CommentsListActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

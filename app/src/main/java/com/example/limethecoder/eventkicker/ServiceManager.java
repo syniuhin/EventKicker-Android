@@ -1,6 +1,7 @@
 package com.example.limethecoder.eventkicker;
 
 import android.util.Base64;
+import com.example.limethecoder.eventkicker.model.Comment;
 import com.example.limethecoder.eventkicker.net.ApiResponse;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
@@ -82,8 +83,24 @@ public class ServiceManager {
         @GET("/api/events/{id}")
         Call<ApiResponse<EventItem>> getEvent(@Path("id") int eventId);
 
+      @GET("/api/events/{id}/comments/preview/{count}")
+      Call<ApiResponse<Comment>> getEventComments(
+          @Path("id") int eventId, @Path("count") int count);
 
-        @GET("/api/users")
+      @GET("/api/events/{id}/comments/preview/5")
+      Call<ApiResponse<Comment>> getEventComments(@Path("id") int eventId);
+
+
+      @GET("/api/events/{id}/comments")
+      Call<ApiResponse<Comment>> getAllEventComments(@Path("id") int eventId);
+
+      @GET("/api/events/{id}/likes/count")
+      Call<ApiResponse> getLikesCnt(@Path("id") int eventId);
+
+      @GET("/api/events/{id}/likes/done")
+      Call<ApiResponse> isLikedStatus(@Path("id") int eventId);
+
+      @GET("/api/users")
         Call<ApiResponse<EventItem>> loadUsers();
 
         @GET("/api/users/{id}")
@@ -91,6 +108,7 @@ public class ServiceManager {
 
         @GET("/api/users/{id}/events")
         Call<ApiResponse<EventItem>> getUserEvents(@Path("id") int userId);
+
         /*
            @POST("/api/events")
         Call<ApiResponse<EventItem>> createEvent(@Query("name") String name, @Query("authorId") int authorId,

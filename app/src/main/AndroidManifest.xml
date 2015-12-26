@@ -68,6 +68,10 @@
             android:label="@string/title_activity_event_creator"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity
+            android:name=".CommentsListActivity"
+            android:label="@string/title_activity_comments_list" >
+        </activity>
     </application>
 
 </manifest>

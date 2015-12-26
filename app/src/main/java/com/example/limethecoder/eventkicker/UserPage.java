@@ -6,26 +6,22 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.limethecoder.eventkicker.net.ApiResponse;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.ArrayList;
-
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Retrofit;
+
+import java.util.ArrayList;
 
 public class UserPage extends AppCompatActivity {
 
@@ -68,9 +64,9 @@ public class UserPage extends AppCompatActivity {
         userEventsView = (RecyclerView) findViewById(R.id.myEvents);
         userContributedEventsView = (RecyclerView) findViewById(R.id.contributedEvents);
 
-        eventsLayoutManager = new LinearLayoutManager(this);
-        userEventsView.setLayoutManager(eventsLayoutManager);
-        ((LinearLayoutManager)eventsLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+      eventsLayoutManager = new LinearLayoutManager(this);
+      userEventsView.setLayoutManager(eventsLayoutManager);
+      ((LinearLayoutManager)eventsLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
 
         eventsLayoutManager = new LinearLayoutManager(this);
         userContributedEventsView.setLayoutManager(eventsLayoutManager);

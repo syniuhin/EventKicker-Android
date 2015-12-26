@@ -40,7 +40,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/event_descr"
                         android:text="Description Description Description Description Description Description Description Description"
-                android:padding="10dp"/>
+                        android:padding="10dp"/>
 
             </android.support.v7.widget.CardView>
 
@@ -49,8 +49,8 @@
                     android:layout_height="wrap_content"
                     android:text="Additional information"
                     style="@style/CardViewHeader"
-            android:textSize="22sp"
-            android:gravity="left"/>
+                    android:textSize="22sp"
+                    android:gravity="left"/>
 
             <TextView
                     android:layout_width="match_parent"
@@ -221,21 +221,124 @@
                     <TextView android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:text="Comments"
-                    style="@style/CardViewHeader"/>
+                              style="@style/CardViewHeader"/>
 
-                    <TextView
-                            android:id="@+id/comments"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_gravity="center_vertical"
-                            android:alpha="0.8"
-                            android:textColor="#ff272727"
-                            android:textSize="15dp"
-                            android:text="Comments"/>
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="vertical">
+
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/comment_author"
+                                  android:maxLines="1"
+                                  android:singleLine="true"
+                                  android:textSize="20sp"
+                                  android:gravity="center_vertical"
+                                  android:textStyle="bold"
+                                  android:text = "Author">
+                        </TextView>
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/comment_content"
+                                  android:maxLines="4"
+                                  android:layout_marginTop="7dp"
+                                  android:layout_marginLeft="10dp"
+                                  android:textSize="17sp"
+                                  android:text = "Comment">
+                        </TextView>
+
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/comment_date"
+                                  android:layout_marginTop="5dp"
+                                  android:text = "Date">
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="vertical"
+                        android:layout_marginTop="10dp">
+
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/comment_author2"
+                                  android:maxLines="1"
+                                  android:singleLine="true"
+                                  android:textSize="20sp"
+                                  android:gravity="center_vertical"
+                                  android:textStyle="bold"
+                                  android:text = "Author">
+                        </TextView>
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/comment_content2"
+                                  android:maxLines="4"
+                                  android:layout_marginTop="7dp"
+                                  android:layout_marginLeft="10dp"
+                                  android:textSize="17sp"
+                                  android:text = "Comment">
+                        </TextView>
+
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/comment_date2"
+                                  android:layout_marginTop="5dp"
+                                  android:text = "Date">
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="vertical"
+                                  android:layout_marginTop="10dp">
+
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/comment_author3"
+                                  android:maxLines="1"
+                                  android:singleLine="true"
+                                  android:textSize="20sp"
+                                  android:gravity="center_vertical"
+                                  android:textStyle="bold"
+                                  android:text = "Author">
+                        </TextView>
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/comment_content3"
+                                  android:maxLines="4"
+                                  android:layout_marginTop="7dp"
+                                  android:layout_marginLeft="10dp"
+                                  android:textSize="17sp"
+                                  android:text = "Comment">
+                        </TextView>
+
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:id="@+id/comment_date3"
+                                  android:layout_marginTop="5dp"
+                                  android:text = "Date">
+                        </TextView>
+
+                    </LinearLayout>
 
                     <TextView android:layout_width="match_parent"
                               android:layout_height="wrap_content"
+                              android:id="@+id/comments_more"
                               android:text="Click to view more..."
                               android:textColor="@android:color/black"
                               android:gravity="right"/>
