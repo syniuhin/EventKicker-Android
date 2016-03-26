@@ -24,7 +24,7 @@ import java.io.IOException;
  */
 
 public class ServiceManager {
-  private static final String BASE_URL = "http://192.168.1.116:3600";
+  private static final String BASE_URL = "http://192.168.43.39:3600";
 
   public static MyApiEndpointInterface newService() {
     return newService(null, null);
@@ -96,6 +96,8 @@ public class ServiceManager {
     @GET("/api/events/{id}/comments/preview/5")
     Call<ApiResponse<Comment>> getEventComments(@Path("id") int eventId);
 
+    @POST("/api/comments")
+    Call<ApiResponse<Comment>> postComment(@Body Comment comment);
 
     @GET("/api/events/{id}/comments")
     Call<ApiResponse<Comment>> getAllEventComments(@Path("id") int eventId);
@@ -117,16 +119,6 @@ public class ServiceManager {
 
     @POST("/api/likes")
     Call<ApiResponse<Like>> postLike(@Body Like body);
-        /*
-           @POST("/api/events")
-        Call<ApiResponse<EventItem>> createEvent(@Query("name") String name,
-        @Query("authorId") int authorId,
-                                              @Query("description") String
-                                              description, @Query
-                                              ("timeCreated") String
-                                              timeCreated,
-                                              @Query("timeScheduled") String timeScheduled);
-         */
   }
 
 }
